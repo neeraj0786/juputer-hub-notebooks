@@ -41,7 +41,21 @@
       {{login_error}}
     </p>
     {% endif %}
-    <a href="https://authentication.acciojob.com/login/phone?client_id=Acciojob&amp;redirect_uri=https://b8b4-121-240-3-130.in.ngrok.io/jupyter-hub/oauth_callback&response_type=token" class="group relative w-80 flex justify-center py-2 px-4 border border-transparent text-sm font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 mt-5" style="background-color: rgb(52, 105, 175);">Continue with Acciojob</a>
+    <a id="authLink" href="https://authentication.acciojob.com/login/phone?client_id=Acciojob&amp;redirect_uri=https://b8b4-121-240-3-130.in.ngrok.io/jupyter-hub/oauth_callback&amp;response_type=token" class="group relative w-80 flex justify-center py-2 px-4 border border-transparent text-sm font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 mt-5" style="background-color: rgb(52, 105, 175);">Continue with Acciojob</a>
+
+    <script>
+        var authLink = document.getElementById('authLink');
+        authLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            var redirectUri = authLink.getAttribute('href');
+            var accessToken = window.location.hash.substr(1).split('=')[1]; // Extract the access token from the URL fragment
+            
+            var newUrl = redirectUri + '?access_token=' + accessToken; // Construct the new URL with the access token as a query parameter
+            
+            window.location.href = newUrl; // Redirect to the new URL
+        });
+    </script>
     <label for="username_input">Username:</label>
 
     {% block login_terms %}
