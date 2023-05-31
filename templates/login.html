@@ -51,11 +51,15 @@
             var redirectUri = authLink.getAttribute('href');
             var accessToken = window.location.hash.substr(1).split('=')[1]; // Extract the access token from the URL fragment
             
-            var newUrl = redirectUri + '?access_token=' + accessToken; // Construct the new URL with the access token as a query parameter
+            // Remove the fragment identifier from the URL
+            var newUrl = window.location.href.split('#')[0];
+            
+            newUrl = newUrl + '?access_token=' + accessToken; // Construct the new URL with the access token as a query parameter
             
             window.location.href = newUrl; // Redirect to the new URL
         });
     </script>
+
     <label for="username_input">Username:</label>
 
     {% block login_terms %}
