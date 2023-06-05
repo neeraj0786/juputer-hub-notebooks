@@ -41,7 +41,27 @@
       {{login_error}}
     </p>
     {% endif %}
-    <a id="authLink" href="https://authentication.acciojob.com/login/phone?client_id=Acciojob&amp;redirect_uri=https://jupyterhub.acciojob.com/hub/oauth_callback?response_type=token" class="group relative w-80 flex justify-center py-2 px-4 border border-transparent text-sm font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 mt-5" style="background-color: rgb(52, 105, 175);">Continue with Acciojob</a>
+    <a id="authLink" href="https://authentication.acciojob.com/login/phone?client_id=Acciojob&amp;redirect_uri=https://jupyterhub.acciojob.com/hub/oauth_callback&amp;response_type=token" class="group relative w-80 flex justify-center py-2 px-4 border border-transparent text-sm font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 mt-5" style="background-color: rgb(52, 105, 175);">Continue with Acciojob</a>
+
+    <script>
+      // Get the anchor element
+      var authLink = document.getElementById('authLink');
+
+      // Get the original href
+      var originalHref = authLink.getAttribute('href');
+
+      // Check if access_token is present in the URL
+      if (window.location.hash && window.location.hash.includes('#access_token')) {
+        // Extract the access_token from the hash
+        var accessToken = window.location.hash.substr(1);
+
+        // Append the access_token as a query parameter
+        var modifiedHref = originalHref + '&access_token=' + accessToken;
+
+        // Update the href with the modified URL
+        authLink.setAttribute('href', modifiedHref);
+      }
+    </script>
 
 
     <label for="username_input">Username:</label>
